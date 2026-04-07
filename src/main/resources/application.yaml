@@ -1,3 +1,32 @@
 spring:
   application:
     name: fairytale
+
+  datasource:
+    url: "jdbc:postgresql://localhost:15432/appdb"
+    username: "appTest"
+    password: ""
+    driver-class-name: org.postgresql.Driver
+
+  ai:
+    ollama:
+      base-url: http://[::1]:11434
+      chat:
+        options:
+          model: qwen3:8b
+      embedding: 
+        options:
+          model: nomic-embed-text:latest
+          seed: 42
+
+server:
+  port: 8080
+
+app:
+  collect:
+    kcisa:
+      base-url: https://api.kcisa.kr
+      endpoint: /openapi/service/rest/meta14/getNLCF031801
+      service-key: 
+      num-of-rows: 100
+      response-type: json
