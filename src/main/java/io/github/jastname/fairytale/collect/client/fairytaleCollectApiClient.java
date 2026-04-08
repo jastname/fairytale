@@ -6,6 +6,7 @@ import org.springframework.web.client.RestClient;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import io.github.jastname.fairytale.common.config.KcisaProperties;
+import io.github.jastname.fairytale.collect.dto.KcisaResponse;
 import lombok.RequiredArgsConstructor;
 
 //국립어린이청소년도서관_다국어동화구연-한국전래동화 API 클라이언트
@@ -16,14 +17,14 @@ public class fairytaleCollectApiClient {
     private final RestClient restClient;
     private final KcisaProperties kcisaProperties;
 
-    public String getFairytales(int pageNo) {
+    public KcisaResponse getFairytales(int pageNo) {
         String url = buildUrl(pageNo);
 
         return restClient.get()
                 .uri(url)
                 .accept(kcisaProperties.getResponseType())
                 .retrieve()
-                .body(String.class);
+                .body(KcisaResponse.class);
     }
 
     public String buildUrl(int pageNo) {

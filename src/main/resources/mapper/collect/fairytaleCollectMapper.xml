@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="io.github.jastname.fairytale.collect.mapper.fairytaleCollectMapper">
+
+    <insert id="insertCollectHistory"
+            parameterType="io.github.jastname.fairytale.collect.model.CollectHistory">
+        INSERT INTO tb_nlcf_collect (
+            collect_id
+            , request_url
+            , page_no
+            , num_of_rows
+            , result_code
+            , result_msg
+            , success_yn
+            , error_message
+            , collected_count
+            , raw_response
+            , reg_dt
+        )
+        VALUES (
+            #{collectId}
+            , #{requestUrl}
+            , #{pageNo}
+            , #{numOfRows}
+            , #{resultCode}
+            , #{resultMsg}
+            , #{successYn}
+            , #{errorMessage}
+            , #{collectedCount}
+            , #{rawResponse}
+            , CURRENT_TIMESTAMP
+        )
+    </insert>
+
+    <insert id="upsertStory"
+            parameterType="io.github.jastname.fairytale.collect.dto.KcisaItem">    
+        INSERT INTO tb_nlcf_fairytale (
+            fairytale_id
+            , collect_id
+            , title
+            , alternative_title
+            , creator
+            , reg_date_raw
+            , collection_db
+            , subject_category
+            , subject_keyword
+            , extent
+            , description
+            , spatial_coverage
+            , temporal_info
+            , person_info
+            , language
+            , source_title
+            , reference_identifier
+            , rights_info
+            , copyright_others
+            , content_url
+            , contributor
+            , use_yn
+            , reg_dt
+            , upd_dt
+        )
+        VALUES (
+            #{fairytaleId}
+            , #{collectId}
+            , #{title}
+            , #{alternativeTitle}
+            , #{creator}
+            , #{regDate}
+            , #{collectionDb}
+            , #{subjectCategory}
+            , #{subjectKeyword}
+            , #{extent}
+            , #{description}
+            , #{spatialCoverage}
+            , #{temporal}
+            , #{person}
+            , #{language}
+            , #{sourceTitle}
+            , #{referenceIdentifier}
+            , #{rights}
+            , #{copyrightOthers}
+            , #{url}
+            , #{contributor}
+            , 'Y'
+            , CURRENT_TIMESTAMP
+            , CURRENT_TIMESTAMP
+        )
+<!-- 20260408 이성민: 추후 사용 가능성 있어 작성 후 주석 -->
+<!--         ON CONFLICT (fairytale_id)
+        DO UPDATE SET
+            	collect_id				= EXCLUDED.collect_id
+            ,	title               	= EXCLUDED.title
+            ,	alternative_title   	= EXCLUDED.alternative_title
+            ,	creator             	= EXCLUDED.creator
+            ,	reg_date_raw        	= EXCLUDED.reg_date_raw
+            ,	collection_db       	= EXCLUDED.collection_db
+            ,	subject_category    	= EXCLUDED.subject_category
+            ,	subject_keyword     	= EXCLUDED.subject_keyword
+            ,	extent              	= EXCLUDED.extent
+            ,	description         	= EXCLUDED.description
+            ,	spatial_coverage    	= EXCLUDED.spatial_coverage
+            ,	temporal_info       	= EXCLUDED.temporal_info
+            ,	person_info         	= EXCLUDED.person_info
+            ,	language            	= EXCLUDED.language
+            ,	source_title        	= EXCLUDED.source_title
+            ,	reference_identifier	= EXCLUDED.reference_identifier
+            ,	rights_info         	= EXCLUDED.rights_info
+            ,	copyright_others    	= EXCLUDED.copyright_others
+            ,	content_url         	= EXCLUDED.content_url
+            ,	contributor         	= EXCLUDED.contributor
+            ,	use_yn              	= 'Y'
+            ,	upd_dt              	= CURRENT_TIMESTAMP -->
+    </insert>
+    
+    <delete id="deleteFairytaleAll">
+    	DELETE FROM tb_nlcf_fairytale
+    </delete>
+    
+    <delete id="deleteFairytale" parameterType="String">
+    	DELETE FROM tb_nlcf_fairytale
+    	WHERE fairytale_id = #{fairytaleId}
+    </delete>
+
+</mapper>

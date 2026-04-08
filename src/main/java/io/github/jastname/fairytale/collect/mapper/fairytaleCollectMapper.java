@@ -8,5 +8,10 @@ import io.github.jastname.fairytale.collect.model.CollectHistory;
 @Mapper
 public interface fairytaleCollectMapper {
 
+    int insertCollectHistory(CollectHistory collectHistory);
+
+    int upsertStory(KcisaItem item);
+    
+    int deleteFairytaleAll();
 
 }

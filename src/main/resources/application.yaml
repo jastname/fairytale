@@ -19,6 +19,11 @@ spring:
           model: nomic-embed-text:latest
           seed: 42
 
+mybatis:
+  mapper-locations: classpath:mapper/**/*.xml
+  configuration:
+    map-underscore-to-camel-case: true
+
 server:
   port: 8080
 

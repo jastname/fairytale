@@ -1,0 +1,44 @@
+
+20260408 이성민 추가
+CREATE TABLE tb_nlcf_fairytale (
+    fairytale_id          VARCHAR(50)   PRIMARY KEY,
+    collect_id            VARCHAR(50)   NOT NULL,
+    title                 VARCHAR(500)  NOT NULL,
+    alternative_title     VARCHAR(500),
+    creator               VARCHAR(300),
+    reg_date_raw          VARCHAR(50),
+    collection_db         VARCHAR(300),
+    subject_category      VARCHAR(500),
+    subject_keyword       VARCHAR(1000),
+    extent                VARCHAR(200),
+    description           TEXT          NOT NULL,
+    spatial_coverage      VARCHAR(1000),
+    temporal_info         VARCHAR(500),
+    person_info           VARCHAR(500),
+    "language"            VARCHAR(100),
+    source_title          VARCHAR(500),
+    reference_identifier  VARCHAR(1000),
+    rights_info           VARCHAR(500),
+    copyright_others      VARCHAR(1000),
+    content_url           VARCHAR(1000),
+    contributor           VARCHAR(500),
+    use_yn                BPCHAR(1),
+    reg_dt                TIMESTAMP,
+    upd_dt                TIMESTAMP
+);
+
+CREATE TABLE tb_nlcf_collect (
+    collect_id       VARCHAR(50)   PRIMARY KEY,
+    request_url      VARCHAR(1000),
+    page_no          INTEGER,
+    num_of_rows      INTEGER,
+    result_code      VARCHAR(20),
+    result_msg       VARCHAR(200),
+    success_yn       CHAR(1),
+    error_message    TEXT,
+    collected_count  INTEGER       DEFAULT 0,
+    raw_response     TEXT,
+    reg_dt           TIMESTAMP     DEFAULT CURRENT_TIMESTAMP
+);
+
+==========================================================================

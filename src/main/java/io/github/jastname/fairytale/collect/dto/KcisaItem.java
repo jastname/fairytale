@@ -1,7 +1,8 @@
 package io.github.jastname.fairytale.collect.dto;
 
 public class KcisaItem {
-
+	
+	//국립어린이청소년도서관_다국어동화구연-한국전래동화 API로 넘어오는 메타데이터
     private String title;
     private String alternativeTitle;
     private String creator;
@@ -22,8 +23,8 @@ public class KcisaItem {
     private String url;
     private String contributor;
     
-    private Long collectId;
-    private String hashKey;
+    private String collectId;
+    private String fairytaleId;
     
     public String getTitle() {
         return title;
@@ -177,19 +178,19 @@ public class KcisaItem {
         this.contributor = contributor;
     }
 
-	public Long getCollectId() {
+	public String getCollectId() {
 		return collectId;
 	}
 
-	public void setCollectId(Long collectId) {
+	public void setCollectId(String collectId) {
 		this.collectId = collectId;
 	}
 
-	public String getHashKey() {
-		return hashKey;
+	public String getFairytaleId() {
+		return fairytaleId;
 	}
 
-	public void setHashKey(String hashKey) {
-		this.hashKey = hashKey;
+	public void setFairytaleId(String fairytaleId) {
+		this.fairytaleId = fairytaleId;
 	}
 }

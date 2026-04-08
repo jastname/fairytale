@@ -2,7 +2,9 @@ package io.github.jastname.fairytale.common.config;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.http.MediaType;
+import org.springframework.stereotype.Component;
 
+@Component
 @ConfigurationProperties(prefix = "app.collect.kcisa")
 public class KcisaProperties {
 

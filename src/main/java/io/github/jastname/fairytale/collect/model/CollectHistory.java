@@ -2,7 +2,7 @@ package io.github.jastname.fairytale.collect.model;
 
 public class CollectHistory {
 
-    private Long collectId;
+    private String collectId;
     private String requestUrl;
     private Integer pageNo;
     private Integer numOfRows;
@@ -13,11 +13,11 @@ public class CollectHistory {
     private Integer collectedCount;
     private String rawResponse;
 
-    public Long getCollectId() {
+    public String getCollectId() {
         return collectId;
     }
 
-    public void setCollectId(Long collectId) {
+    public void setCollectId(String collectId) {
         this.collectId = collectId;
     }
 
