@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="io.github.jastname.fairytale.rag.mapper.ragMapper">
+
+	<select id="selectAllFairytaleForChunk" resultType="io.github.jastname.fairytale.rag.dto.ragChunkSource" >
+	
+		SELECT 
+			fairytale_id 
+			, collect_id 
+			, title
+			, description 
+		FROM tb_nlcf_fairytale
+		
+	</select>
+	
+	<delete id="deleteChunkAll">
+		DELETE FROM tb_nlcf_fairytale_chunk
+	</delete>
+	
+	<insert id="insertChunk" parameterType="io.github.jastname.fairytale.rag.dto.ragChunk">
+		INSERT INTO tb_nlcf_fairytale_chunk (
+			chunk_id
+			, fairytale_id
+			, chunk_no
+			, title
+			, chunk_text
+		) VALUES (
+			#{chunkId}
+			, #{fairytaleId}
+			, #{chunkNo}
+			, #{title}
+			, #{chunkText}
+		)
+	</insert>
+	
+	<delete id="deleteEmbeddedAll">
+		DELETE FROM tb_nlcf_fairytale_embedding
+	</delete>
+	
+	<insert id="insertEmbeded" parameterType="io.github.jastname.fairytale.rag.dto.ragEmbed">
+		INSERT INTO tb_nlcf_fairytale_embedding (
+	        embedding_id
+	        , chunk_id
+	        , embedding_model
+	        , title_vector
+	        , embedding_vector
+	    ) VALUES (
+	        #{embeddingId}
+	        , #{chunkId}
+	        , #{embeddingModel}
+	        , CAST(#{titleVector} AS vector)
+	        , CAST(#{embeddingVector} AS vector)
+	    )
+	</insert>
+
+</mapper>

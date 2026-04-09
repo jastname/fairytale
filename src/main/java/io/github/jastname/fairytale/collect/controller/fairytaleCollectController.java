@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import io.github.jastname.fairytale.collect.service.fairytaleCollectService;
 
@@ -20,7 +21,7 @@ public class fairytaleCollectController {
 	@Qualifier("fairytaleCollectService")
 	private fairytaleCollectService fairytaleCollectService;
 	
-	
+	@ResponseBody
 	@PostMapping("start")
 	public String startCollecting() {
 		LOG.info("동화 수집 시작");

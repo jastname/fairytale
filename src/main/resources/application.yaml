@@ -35,3 +35,6 @@ app:
       service-key: 
       num-of-rows: 100
       response-type: json
+  rag:
+    chunk-size: 500
+    chunk-overlap: 50

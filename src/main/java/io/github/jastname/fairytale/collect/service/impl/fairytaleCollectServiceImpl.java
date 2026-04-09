@@ -7,6 +7,7 @@ import java.util.concurrent.TimeUnit;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import io.github.jastname.fairytale.collect.client.fairytaleCollectApiClient;
 import io.github.jastname.fairytale.collect.dto.KcisaItem;
@@ -121,6 +122,7 @@ public class fairytaleCollectServiceImpl implements fairytaleCollectService {
 
     
     //수집 내역 저장
+    @Transactional
     private String saveHistory(int page, KcisaResponse response, List<KcisaItem> items) {
         String collectId = CommonUtil.idMake("");
 
@@ -143,7 +145,8 @@ public class fairytaleCollectServiceImpl implements fairytaleCollectService {
             throw e;
         }
     }
-
+    
+    @Transactional
     private void saveItems(List<KcisaItem> items, String collectId, int page) {
         try {
             for (KcisaItem item : items) {
