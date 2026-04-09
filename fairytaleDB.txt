@@ -42,3 +42,24 @@ CREATE TABLE tb_nlcf_collect (
 );
 
 ==========================================================================
+
+20260409 이성민 추가
+
+CREATE TABLE tb_nlcf_fairytale_embedding (
+    embedding_id        VARCHAR(50) PRIMARY KEY,
+    chunk_id            VARCHAR(50) NOT NULL,
+    embedding_model     VARCHAR(200),
+    title_vector		VECTOR(768),
+    embedding_vector    VECTOR(768),
+    reg_dt              TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE tb_nlcf_fairytale_chunk (
+    chunk_id             VARCHAR(50) PRIMARY KEY,
+    fairytale_id         VARCHAR(50) NOT NULL,
+    chunk_no             INTEGER NOT NULL,
+    title                TEXT NOT NULL,
+    chunk_text           TEXT NOT NULL,
+    reg_dt               TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    CONSTRAINT uq_fairytale_chunk_no UNIQUE (fairytale_id, chunk_no)
+);
