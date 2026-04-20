@@ -1,6 +1,6 @@
 package io.github.jastname.fairytale.rag.dto;
 
-public class ragEmbed {
+public class RagEmbed {
 
 	private String embeddingId;
 	private String chunkId;

@@ -12,7 +12,7 @@ import lombok.RequiredArgsConstructor;
 //국립어린이청소년도서관_다국어동화구연-한국전래동화 API 클라이언트
 @Component
 @RequiredArgsConstructor
-public class fairytaleCollectApiClient {
+public class FairytaleCollectApiClient {
 
     private final RestClient restClient;
     private final KcisaProperties kcisaProperties;
@@ -40,4 +40,4 @@ public class fairytaleCollectApiClient {
     public int getNumOfRows() {
         return kcisaProperties.getNumOfRows();
     }
-}
+}	

@@ -27,6 +27,7 @@ dependencies {
 	implementation 'org.springframework.ai:spring-ai-advisors-vector-store'
 	implementation 'org.springframework.ai:spring-ai-starter-model-ollama'
 	implementation 'org.springframework.ai:spring-ai-starter-vector-store-pgvector'
+	implementation 'org.springframework.ai:spring-ai-starter-model-chat-memory-repository-jdbc'
 	compileOnly 'org.projectlombok:lombok'
 	runtimeOnly 'com.h2database:h2'
 	runtimeOnly 'org.postgresql:postgresql'

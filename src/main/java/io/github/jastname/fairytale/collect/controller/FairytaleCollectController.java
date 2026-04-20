@@ -9,17 +9,17 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import io.github.jastname.fairytale.collect.service.fairytaleCollectService;
+import io.github.jastname.fairytale.collect.service.FairytaleCollectService;
 
 @Controller
 @RequestMapping("/collect/")
-public class fairytaleCollectController {
+public class FairytaleCollectController {
 	
-	private static final Logger LOG = LogManager.getLogger(fairytaleCollectController.class);
+	private static final Logger LOG = LogManager.getLogger(FairytaleCollectController.class);
 
 	@Autowired
 	@Qualifier("fairytaleCollectService")
-	private fairytaleCollectService fairytaleCollectService;
+	private FairytaleCollectService fairytaleCollectService;
 	
 	@ResponseBody
 	@PostMapping("start")

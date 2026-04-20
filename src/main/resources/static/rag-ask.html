@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RAG 질문 테스트</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #f0f2f5;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      min-height: 100vh;
+      padding: 40px 16px;
+    }
+
+    .card {
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+      padding: 36px 40px;
+      width: 100%;
+      max-width: 640px;
+    }
+
+    h1 {
+      font-size: 1.4rem;
+      color: #333;
+      margin-bottom: 24px;
+    }
+
+    .field {
+      margin-bottom: 16px;
+    }
+
+    label {
+      display: block;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: #555;
+      margin-bottom: 6px;
+    }
+
+    input, textarea {
+      width: 100%;
+      padding: 10px 14px;
+      border: 1px solid #d1d5db;
+      border-radius: 8px;
+      font-size: 0.95rem;
+      color: #333;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    input:focus, textarea:focus {
+      border-color: #6366f1;
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 90px;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      background: #6366f1;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s;
+      margin-top: 8px;
+    }
+
+    button:hover { background: #4f46e5; }
+    button:disabled { background: #a5b4fc; cursor: not-allowed; }
+
+    .result-box {
+      margin-top: 24px;
+      padding: 16px;
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      font-size: 0.95rem;
+      color: #374151;
+      white-space: pre-wrap;
+      word-break: break-word;
+      display: none;
+    }
+
+    .result-box.visible { display: block; }
+
+    .status {
+      font-size: 0.82rem;
+      margin-top: 10px;
+      color: #6b7280;
+    }
+
+    .status.error { color: #ef4444; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>🧚 RAG 질문 테스트</h1>
+
+    <div class="field">
+      <label for="question">질문 *</label>
+      <textarea id="question" placeholder="동화 관련 질문을 입력하세요..."></textarea>
+    </div>
+
+    <div class="field">
+      <label for="userId">사용자 ID</label>
+      <input type="text" id="userId" placeholder="user-001" />
+    </div>
+
+    <div class="field">
+      <label for="conversationId">대화 ID</label>
+      <input type="text" id="conversationId" placeholder="conv-001" />
+    </div>
+
+    <button id="askBtn" onclick="sendAsk()">질문하기</button>
+
+    <div class="status" id="status"></div>
+
+    <div class="result-box" id="resultBox"></div>
+  </div>
+
+  <script>
+    async function sendAsk() {
+      const question = document.getElementById('question').value.trim();
+      if (!question) {
+        alert('질문을 입력해주세요.');
+        return;
+      }
+
+      const userId = document.getElementById('userId').value.trim();
+      const conversationId = document.getElementById('conversationId').value.trim();
+
+      const btn = document.getElementById('askBtn');
+      const status = document.getElementById('status');
+      const resultBox = document.getElementById('resultBox');
+
+      btn.disabled = true;
+      btn.textContent = '처리 중...';
+      status.className = 'status';
+      status.textContent = '서버에 요청 중입니다...';
+      resultBox.classList.remove('visible');
+
+      const params = new URLSearchParams();
+      params.append('question', question);
+      if (userId) params.append('userId', userId);
+      if (conversationId) params.append('conversationId', conversationId);
+
+      try {
+        const response = await fetch('/rag/ask', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          body: params.toString()
+        });
+
+        const text = await response.text();
+        status.textContent = `응답 상태: ${response.status}`;
+
+        resultBox.textContent = text || '(서버 응답 없음 - null 반환)';
+        resultBox.classList.add('visible');
+      } catch (e) {
+        status.className = 'status error';
+        status.textContent = '오류: ' + e.message;
+      } finally {
+        btn.disabled = false;
+        btn.textContent = '질문하기';
+      }
+    }
+
+    // Enter(Ctrl+Enter) 단축키
+    document.getElementById('question').addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' && e.ctrlKey) sendAsk();
+    });
+  </script>
+</body>
+</html>

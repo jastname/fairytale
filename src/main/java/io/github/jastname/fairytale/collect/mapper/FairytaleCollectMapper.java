@@ -6,7 +6,7 @@ import io.github.jastname.fairytale.collect.dto.KcisaItem;
 import io.github.jastname.fairytale.collect.model.CollectHistory;
 
 @Mapper
-public interface fairytaleCollectMapper {
+public interface FairytaleCollectMapper {
 
     int insertCollectHistory(CollectHistory collectHistory);
 

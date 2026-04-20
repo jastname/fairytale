@@ -3,9 +3,9 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="io.github.jastname.fairytale.rag.mapper.ragMapper">
+<mapper namespace="io.github.jastname.fairytale.rag.mapper.RagMapper">
 
-	<select id="selectAllFairytaleForChunk" resultType="io.github.jastname.fairytale.rag.dto.ragChunkSource" >
+	<select id="selectAllFairytaleForChunk" resultType="io.github.jastname.fairytale.rag.dto.RagChunkSource" >
 	
 		SELECT 
 			fairytale_id 
@@ -20,7 +20,7 @@
 		DELETE FROM tb_nlcf_fairytale_chunk
 	</delete>
 	
-	<insert id="insertChunk" parameterType="io.github.jastname.fairytale.rag.dto.ragChunk">
+	<insert id="insertChunk" parameterType="io.github.jastname.fairytale.rag.dto.RagChunk">
 		INSERT INTO tb_nlcf_fairytale_chunk (
 			chunk_id
 			, fairytale_id
@@ -40,7 +40,7 @@
 		DELETE FROM tb_nlcf_fairytale_embedding
 	</delete>
 	
-	<insert id="insertEmbeded" parameterType="io.github.jastname.fairytale.rag.dto.ragEmbed">
+	<insert id="insertEmbeded" parameterType="io.github.jastname.fairytale.rag.dto.RagEmbed">
 		INSERT INTO tb_nlcf_fairytale_embedding (
 	        embedding_id
 	        , chunk_id
@@ -55,5 +55,7 @@
 	        , CAST(#{embeddingVector} AS vector)
 	    )
 	</insert>
+	
+	
 
 </mapper>

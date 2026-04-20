@@ -1,6 +1,6 @@
 package io.github.jastname.fairytale.rag.service;
 
-public interface embeddingService {
+public interface EmbeddingService {
 
 	String chunkAndEmbedAllFairytales();
 

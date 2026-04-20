@@ -11,21 +11,21 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import io.github.jastname.fairytale.rag.dto.ragChunk;
-import io.github.jastname.fairytale.rag.dto.ragEmbed;
-import io.github.jastname.fairytale.rag.mapper.ragMapper;
-import io.github.jastname.fairytale.rag.service.embeddingService;
+import io.github.jastname.fairytale.rag.dto.RagChunk;
+import io.github.jastname.fairytale.rag.dto.RagEmbed;
+import io.github.jastname.fairytale.rag.mapper.RagMapper;
+import io.github.jastname.fairytale.rag.service.EmbeddingService;
 import io.github.jastname.fairytale.utill.CommonUtil;
 import lombok.RequiredArgsConstructor;
 
 @Service("embeddingService")
 @RequiredArgsConstructor
-public class embeddingServiceImpl implements embeddingService {
+public class EmbeddingServiceImpl implements EmbeddingService {
 
-    private static final Logger log = LoggerFactory.getLogger(embeddingServiceImpl.class);
+    private static final Logger log = LoggerFactory.getLogger(EmbeddingServiceImpl.class);
     private static final long PAGE_DELAY_MS = 500L;
 
-    private final ragMapper mapper;
+    private final RagMapper mapper;
     private final EmbeddingModel embeddingModel;
 
     @Value("${spring.ai.ollama.embedding.options.model}")
@@ -98,7 +98,7 @@ public class embeddingServiceImpl implements embeddingService {
             double[] embededTitle = embed(source.getTitle());
             
             for(int seq = 0; seq < chunks.size(); seq++) {
-                ragChunk chunk = new ragChunk();
+                RagChunk chunk = new RagChunk();
                 chunk.setChunkId(CommonUtil.idMake("CHK"));
                 chunk.setFairytaleId(source.getFairytaleId());
                 chunk.setTitle(source.getTitle());
@@ -110,7 +110,7 @@ public class embeddingServiceImpl implements embeddingService {
                 //임베딩 처리
                 double[] embededText = embed(chunks.get(seq));
                 
-                ragEmbed embed = new ragEmbed();
+                RagEmbed embed = new RagEmbed();
                 embed.setEmbeddingId(CommonUtil.idMake("EMB"));
                 embed.setChunkId(chunk.getChunkId());
                 embed.setEmbeddingModel(modelName());
@@ -126,7 +126,7 @@ public class embeddingServiceImpl implements embeddingService {
 
     /**
      * double[] → "[0.1,0.2,...]" PostgreSQL vector 문자열로 변환
-     */
+     */ 
     private String toVectorString(double[] vector) {
         StringBuilder sb = new StringBuilder("[");
         for (int i = 0; i < vector.length; i++) {

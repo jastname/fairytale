@@ -9,25 +9,25 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import io.github.jastname.fairytale.collect.client.fairytaleCollectApiClient;
+import io.github.jastname.fairytale.collect.client.FairytaleCollectApiClient;
 import io.github.jastname.fairytale.collect.dto.KcisaItem;
 import io.github.jastname.fairytale.collect.dto.KcisaResponse;
-import io.github.jastname.fairytale.collect.mapper.fairytaleCollectMapper;
+import io.github.jastname.fairytale.collect.mapper.FairytaleCollectMapper;
 import io.github.jastname.fairytale.collect.model.CollectHistory;
-import io.github.jastname.fairytale.collect.service.fairytaleCollectService;
+import io.github.jastname.fairytale.collect.service.FairytaleCollectService;
 import lombok.RequiredArgsConstructor;
 
 import io.github.jastname.fairytale.utill.CommonUtil;
 
 @Service("fairytaleCollectService")
 @RequiredArgsConstructor
-public class fairytaleCollectServiceImpl implements fairytaleCollectService {
+public class FairytaleCollectServiceImpl implements FairytaleCollectService {
 
-    private static final Logger log = LoggerFactory.getLogger(fairytaleCollectServiceImpl.class);
+    private static final Logger log = LoggerFactory.getLogger(FairytaleCollectServiceImpl.class);
     private static final long PAGE_DELAY_MS = 500L;
 
-    private final fairytaleCollectApiClient apiClient;
-    private final fairytaleCollectMapper mapper;
+    private final FairytaleCollectApiClient apiClient;
+    private final FairytaleCollectMapper mapper;
 
     @Override
     public String collectFairytales() {

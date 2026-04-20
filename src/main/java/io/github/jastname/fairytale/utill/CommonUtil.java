@@ -8,8 +8,6 @@ import java.util.Random;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import io.github.jastname.fairytale.collect.service.impl.fairytaleCollectServiceImpl;
-
 public class CommonUtil {
 	
 	private static final Logger log = LoggerFactory.getLogger(CommonUtil.class);

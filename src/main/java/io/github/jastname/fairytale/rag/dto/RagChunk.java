@@ -1,6 +1,6 @@
 package io.github.jastname.fairytale.rag.dto;
 
-public class ragChunk {
+public class RagChunk {
 
 	private String chunkId;
 	private String fairytaleId;
